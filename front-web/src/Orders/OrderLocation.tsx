@@ -4,8 +4,8 @@ import AsyncSelect from 'react-select/async';
 import { fetchLocalMapBox } from '../api';
 import { OrderLocationData } from './types';
 const initialPosition = {
-    lat: 51.505,
-    lng: -0.09
+    lat: -25.4321781,
+    lng: -49.2796458
 }
 
 type Place = {
@@ -66,7 +66,7 @@ function OrderLocation({ onChangeLocation }: Props) {
                 </div>
                 <MapContainer 
                     center={address.position} 
-                    zoom={15} 
+                    zoom={13} 
                     key={address.position.lat}
                     scrollWheelZoom
                 >
