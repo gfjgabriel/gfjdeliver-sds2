@@ -5,6 +5,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './src/header';
 import Home from './src/home';
+import Routes from './src/Routes';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -18,8 +19,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Header />
-      <Home />
+      <Routes />
       <StatusBar style="auto" />
     </View>
   );
