@@ -37,20 +37,26 @@ function Orders() {
     }
     
     const handleSubmit = () => {
-        const productsIds = selectedProducts.map(({ id }) => ({ id }));
-        const payload = {
-          ...orderLocation!,
-          products: productsIds
+        if (products.length === 0) {
+            toast.warning('Selecione ao menos um produto para realizar o pedido');
+        } else if (orderLocation?.address === '' || orderLocation?.address === undefined) {
+            toast.warning('Selecione um endereço no mapa para finalizar o pedido');
+        } else {
+            const productsIds = selectedProducts.map(({ id }) => ({ id }));
+            const payload = {
+              ...orderLocation!,
+              products: productsIds
+            }
+          
+            saveOrder(payload)
+                .then((response) => {
+                    toast.error(`Pedido enviado com sucesso! Nº ${response.data.id}`);
+                    setSelectedProducts([]);
+                })
+              .catch(() => {
+                toast.warning('Erro ao enviar pedido');
+              })
         }
-      
-        saveOrder(payload)
-            .then((response) => {
-                toast.error(`Pedido enviado com sucesso! Nº ${response.data.id}`);
-                setSelectedProducts([]);
-            })
-          .catch(() => {
-            toast.warning('Erro ao enviar pedido');
-          })
     }
 
     return (
